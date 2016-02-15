@@ -6,4 +6,4 @@ Gustav Visualization Server
 
 A SocketCluster server that takes Gustav workflows and turns them into this:
 
-![GVS in action](http://i.imgur.com/TtFzngW.gifv)
+![GVS in action](http://i.imgur.com/TtFzngW.gif)
