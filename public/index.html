@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gSankey">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sankey Particles</title>
+    <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/sk.css">
+    <link rel="stylesheet" href="https://rawgit.com/angular/material-start/es5-tutorial/app/assets/app.css"/>
+  </head>
+  <body ng-controller="data as DC" ng-cloak layout="column">
+    
+    <md-toolbar layout="row">    
+        <md-button class="menu" hide-gt-sm ng-click="DC.toggleList()" aria-label="Show User List">
+            <md-icon md-svg-icon="menu" ></md-icon>
+        </md-button>      
+        <h3>Gusav Visualizer</h3>
+    </md-toolbar>
+
+    <div class="container" layout="row" flex>
+        <md-sidenav 
+          ng-click="DC.toggleList()" 
+          md-component-id="left"
+          md-is-locked-open="$mdMedia('gt-sm')" 
+          class="md-whiteframe-4dp" >
+          
+          <md-list>
+            <md-list-item ng-repeat="workflow in DC.workflows">
+                <md-button ng-click="DC.selectFlow(workflow)" ng-class="{'selected' : workflow === DC.active }">
+                  <!--<md-icon md-svg-icon="{{workflow.avatar}}" class="avatar"></md-icon>-->
+                  {{ workflow.name }}
+                </md-button>
+            </md-list-item>
+          </md-list>
+        </md-sidenav>
+
+        <md-content flex id="content">
+          <!--<md-icon md-svg-icon="{{DC.active.avatar}}" class="avatar"></md-icon>-->
+          <h2>{{DC.active.name}}</h2>
+          <!--<p>{{DC.active.content}}</p>-->
+          
+          <!--<div class="center" ng-repeat="flow in DC.workflows">
+            <sankey model="flow" ng-if="flow.name === DC.active"></sankey>
+          </div>-->
+          <sankey flow="DC.active" active-node="DC.showNode" ng-if="DC.active"></sankey>
+          <div>
+            <h2>{{ DC.showNode.name }}</h2>
+            <div ng-repeat="d in DC.datums[DC.showNode.name] | limitTo:-10 track by $index">
+              {{ d | json }}
+            </div>
+          </div>
+          
+          <md-button class="share" md-no-ink ng-click="DC.makeContact(DC.active)" aria-label="Share with {{ DC.active.name }}">
+            <md-icon md-svg-icon="share"></md-icon>
+          </md-button>
+        </md-content>
+    </div>
+    <!--
+
+    </div>
+    <div class="workflow-selector">
+      <h3>Select Flow Thinger</h3>
+      <ul>
+        <li ng-repeat="flow in DC.workflows" ng-click="DC.selectFlow(flow.name)" ng-class="{active: DC.active === flow.name}">{{ flow.name }}</li>
+      </ul>
+    </div>-->
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-aria.min.js"></script>
+    <script src="https://rawgit.com/angular/bower-material/master/angular-material.min.js"></script>
+    <!-- SocketCluster -->
+    <script src="/socketcluster.js"></script>
+    <!-- d3/Sankey -->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="/sklibsankey.js" charset="utf-8"></script>
+    <!-- Me! -->
+    <script src="/ng.js"></script>
+    <script src="/services.js"></script>
+    <script src="/sankey.js"></script>
+</body>
+</html>

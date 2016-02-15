@@ -1,0 +1,33 @@
+{
+  "name": "gustav-server",
+  "description": "Serving Gustav visualizations since 658BC",
+  "version": "0.0.1",
+  "scripts": {
+    "sc": "forever -w --killSignal=SIGTERM server.js",
+    "build": "webpack",
+    "build:watch": "webpack --watch"
+  },
+  "author": "Randall Koutnik",
+  "dependencies": {
+    "@reactivex/rxjs": "^5.0.0-alpha.10",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-aria": "~1.5.0",
+    "angular-material": "~1.0.5",
+    "connect": "3.0.1",
+    "express": "4.13.1",
+    "minimist": "1.1.0",
+    "ramda": "^0.18.0",
+    "serve-static": "1.8.0",
+    "socketcluster": "3.x.x",
+    "socketcluster-client": "3.x.x"
+  },
+  "keywords": [
+    "gustav"
+  ],
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "webpack": "~1.12.13"
+  }
+}
